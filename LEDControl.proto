@@ -46,6 +46,7 @@ message LEDControl {
         LEDControlMode led_control_mode = 6;
         LEDColor color = 7;
         repeated LEDAnimation animation = 8;
+        int32 test = 9;
     }
 
     repeated LEDControlData led_control = 1;
