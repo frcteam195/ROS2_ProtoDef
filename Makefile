@@ -1,7 +1,6 @@
-ARCH := $(shell arch)
 ODIR := out
 LIB := RobotComms.a
-FULL_LIB := $(ODIR)/$(ARCH)/$(LIB)
+FULL_LIB := $(ODIR)/$(LIB)
 
 CXX_FLAGS := -fPIC -I$(ODIR)
 
@@ -19,9 +18,10 @@ $(PROTO): $(PROTO_SOURCES)
 	@/usr/local/bin/protoc --cpp_out=./out *.proto 
 
 $(FULL_LIB): $(PROTO)
-	mkdir -p $(ODIR)/$(ARCH)
-	cd $(ODIR)/$(ARCH) && $(CXX) $(CXX_FLAGS) -c ../*.cc
-	ar -crfv $(FULL_LIB) $(ODIR)/$(ARCH)/*.o
+	@mkdir -p $(ODIR)
+	@cd $(ODIR) && $(CXX) $(CXX_FLAGS) -c ./*.cc
+	@$(AR) -crf $(FULL_LIB) $(ODIR)/*.o
+	@echo Protobuf Library Built Successfully!
 
 clean:
 	@rm -rf $(ODIR)
