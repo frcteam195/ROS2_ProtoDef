@@ -13,9 +13,10 @@ all:
 $(PROTO_SOURCES):
 
 $(PROTO): $(PROTO_SOURCES)
+	@echo $(ODIR)
 	@echo Generating Proto
-	@mkdir -p out
-	@/usr/local/bin/protoc --cpp_out=./out *.proto 
+	@mkdir -p $(ODIR)
+	@/usr/local/bin/protoc --cpp_out=./$(ODIR) *.proto 
 
 $(FULL_LIB): $(PROTO)
 	@mkdir -p $(ODIR)
